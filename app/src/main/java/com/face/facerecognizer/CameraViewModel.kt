@@ -1,7 +1,7 @@
 package com.face.facerecognizer
 
 import android.app.Application
-import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.face.vision.model.FaceNetModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class CameraViewModel(
-    applicationContext: Application
+    private val applicationContext: Application
 ) : AndroidViewModel(applicationContext) {
     private val _analiseState = MutableStateFlow<AnalyseUserImageState>(AnalyseUserImageState.Init)
     val analiseState = _analiseState.asStateFlow()
@@ -44,7 +44,7 @@ class CameraViewModel(
             fileReader.run(
                 arrayListOf(
                     //reference img
-                    "" to Bitmap.createBitmap(600, 480, Bitmap.Config.ARGB_8888)
+                    "" to BitmapFactory.decodeResource(applicationContext.resources, R.mipmap.ivan)
                 ), callback = fileReaderCallback
             )
         }
